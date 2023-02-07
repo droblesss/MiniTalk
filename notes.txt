@@ -1,0 +1,5 @@
+ el argumento 1 del cliente debe ser el Pid que se obtiene del server al ejecutarlo en primer lugar
+ el argumento 2 del cliente debe ser la cadena de texto que el server debe recibir, interpretar y devolver
+la cadena debe ser tasmitada al servidor bit a bit, en funcion de si es 1 o 0 se debería utilizar una señal u otra
+El server debe ir traduciendo los bits y utilizar write para escribir caracter por caracter la traduccción de la cadena. printf no es seguro para señales
+El make debe crear un ejecutable para server y otro para client
