@@ -77,7 +77,5 @@ int main(int argc, char **argv)
 	message = argv[2];
 	sender(pidi, message);
 	argc = 0;
-
 	return(0);
-
 }
