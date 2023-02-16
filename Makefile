@@ -8,13 +8,10 @@ OBJS1 = $(SRCS1: .c=.o)
 SRCS2 = client.c
 OBJS2 = $(SRCS2: .c=.o)
 
+all: $(SERVER) $(ClIENT)
 
-
-
-all: $(SERVER), $(ClIENT)
-
-$(SERVER): $(OBJS1)
+$(SERVER):
     $(CC) $(CFLAGS) $(SERVER)
-    
-$(CLIENT): $(OBJS2)
+
+$(CLIENT):
     $(CC) $(CFLAGS) $(CLIENT)
