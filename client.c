@@ -58,13 +58,13 @@ void	sender(int pidi, char *text)
 				ch = ch << 1;
 				kill(pidi,SIGUSR1);
 			}
-			usleep(250);
+			usleep(1000);
 			cont = cont /2;
 		}
 		write(1, &ch, 1);
 		i++;
 		cont = 128;
-		usleep(250);
+		usleep(1500);
 	}
 }
 
