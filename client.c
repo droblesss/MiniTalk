@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drobles <drobles@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/21 18:01:05 by drobles           #+#    #+#             */
+/*   Updated: 2023/02/21 18:14:16 by drobles          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <signal.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -32,50 +44,62 @@ int	ft_atoi(const char *str)
 	return (numero * sign);
 }
 
+void	bitmove(int pidi, int pos, char ch, int cont)
+{
+	if (pos & cont)
+	{
+		ch = (ch << 1) + 1;
+		kill(pidi, SIGUSR2);
+	}
+	else if (!(pos & cont))
+	{
+		ch = ch << 1;
+		kill(pidi, SIGUSR1);
+	}
+}
 
 void	sender(int pidi, char *text)
 {
-	char ch;
-	int i;
-	char pos;
-	int cont;
+	char	ch;
+	int		i;
+	char	pos;
+	int		cont;
 
 	ch = '\0';
 	i = 0;
 	cont = 128;
-	while(text[i] !='\0')
+	while (text[i] != '\0')
 	{
 		pos = text[i];
 		while (cont > 0)
 		{
-			if (pos & cont)
-			{
-				ch = (ch << 1) + 1;
-				kill(pidi,SIGUSR2);
-			}
-			else if (!(pos & cont))
-			{
-				ch = ch << 1;
-				kill(pidi,SIGUSR1);
-			}
+			bitmove(pidi, pos, ch, cont);
 			usleep(1000);
-			cont = cont /2;
+			cont = cont / 2;
 		}
-		write(1, &ch, 1);
 		i++;
 		cont = 128;
 		usleep(1500);
 	}
 }
 
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	char *message;
-	pid_t pidi;
-	pidi = ft_atoi(argv[1]);
-	message = argv[2];
-	sender(pidi, message);
-	argc = 0;
-	return(0);
+	char	*message;
+	pid_t	pidi;
+
+	if (argc == 3)
+	{
+		pidi = ft_atoi(argv[1]);
+		if (pidi > 0)
+		{
+			message = argv[2];
+			sender(pidi, message);
+		}
+		else
+			printf("ERROR: Invalid PID");
+	}
+	else if (argc != 3)
+		printf("ERROR: Invalid PID");
+	return (0);
 }

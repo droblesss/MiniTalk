@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drobles <drobles@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/21 18:01:17 by drobles           #+#    #+#             */
+/*   Updated: 2023/02/21 18:31:00 by drobles          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <signal.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-int i = 0;
-
 void	ft_usr(int a)
 {
-	static char ch;
+	static char	ch;
+	static int	i;
+
 
 	(void) a;
 	if (a == 30)
@@ -16,7 +28,6 @@ void	ft_usr(int a)
 		i++;
 		usleep(1000);
 	}
-
 	if (a == 31)
 	{
 		ch = (ch << 1) + 1;
@@ -25,7 +36,7 @@ void	ft_usr(int a)
 	}
 	if (i == 8)
 	{
-		write(1, &ch, 1);;
+		write(1, &ch, 1);
 		ch = '\0';
 		i = 0;
 		usleep(1000);
