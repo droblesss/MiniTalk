@@ -6,14 +6,11 @@
 /*   By: drobles <drobles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:01:05 by drobles           #+#    #+#             */
-/*   Updated: 2023/02/21 18:14:16 by drobles          ###   ########.fr       */
+/*   Updated: 2023/02/22 11:24:18 by drobles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h> 
+#include "minitalk.h" 
 
 int	ft_atoi(const char *str)
 {
@@ -97,9 +94,9 @@ int	main(int argc, char **argv)
 			sender(pidi, message);
 		}
 		else
-			printf("ERROR: Invalid PID");
+			ft_printf("ERROR: Invalid PID");
 	}
 	else if (argc != 3)
-		printf("ERROR: Invalid PID");
+		ft_printf("ERROR: Invalid PID");
 	return (0);
 }
